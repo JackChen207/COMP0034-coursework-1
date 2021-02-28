@@ -5,11 +5,11 @@ import matplotlib.dates as mdates
 %matplotlib inline
 
 # Read the data for the population and crime into a data frame skipping the second heading row
-data = pd.read_csv('parliamentary-constituency-profiles-data.csv', usecols=["F100", "F010"], skiprows=[1])
+data = pd.read_csv('parliamentary-constituency-profiles-data.csv', usecols=["Crime Rate", "F010"], skiprows=[1])
 
 # Create a new DataFrame with the required Date column
 population = data.loc[:,['F010']]
-crime = data.loc[:,['F100']]
+crime = data.loc[:,['Crime Rate']]
 
 fig, axes = plt.subplots(figsize=(12, 6))
 
