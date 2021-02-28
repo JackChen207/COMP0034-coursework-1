@@ -11,12 +11,12 @@ data = pd.read_csv('parliamentary-constituency-profiles-data.csv', skiprows=[1])
 # Create the bubble graph
 fig = px.scatter(data,
                  x="POPULATION",
-                 y="F100",
+                 y="Crime Rate",
                  size="pop",
                  color="continent",
                  hover_name="GEO_LABEL",
                  log_x = True,
-                 size_max=60000,
+                 size_max=60,
                  )
 
 fig.update_layout(
@@ -25,7 +25,7 @@ fig.update_layout(
         title='Population',
     ),
     yaxis=dict(
-        title='Crime Rate)',
+        title='Crime Rate',
     ),
 )
 
