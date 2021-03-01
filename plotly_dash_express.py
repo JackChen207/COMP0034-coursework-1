@@ -8,44 +8,36 @@ import dash_bootstrap_components as dbc
 # Read the data
 data = pd.read_csv('parliamentary-constituency-profiles-data.csv', skiprows=[1])
 
-# Create the bubble graph
-fig = px.scatter(data,
-                 x="POPULATION",
-                 y="Crime Rate",
-                 size="pop",
-                 color="continent",
-                 hover_name="GEO_LABEL",
-                 log_x = True,
-                 size_max=60,
-                 )
+# Create the bar chart
+fig = px.bar(data, x="GEO_LABEL", y="POPULATION", color="Mean Income")
 
 fig.update_layout(
-    title='Crime Rate v.s. Population',
+    title='Population v.s. Mean Income',
     xaxis=dict(
-        title='Population',
+        title='London Area',
     ),
     yaxis=dict(
-        title='Crime Rate',
+        title='Population',
     ),
 )
 
-app = dash.Dash(_name_)
+# Create a Dash app and use the dash-bootstrap-components stylesheet
+app = dash.Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 # Create the app layout
 app.layout = html.Div(children=[
-    html.H1(children='Visualization of Population in Greater London'),
+    html.H1(children='Market Pontential in Greater London'),
 
     html.Div(children='''
-        A scatter plot of population in Greater London
+        A bar chart of population with mean income in Greater London
     '''),
 
     dcc.Graph(
-        id='example-graph',
         figure= fig,
         style={'width': '200vh', 'height': '90vh'}
 
     )
 ])
 
-if _name_ == '_main_':
-    app.run_server(debug=True)
+# Run the web app server (turn off reloader as we are running it inside a Jupyter notebook)
+app.run_server(debug=True)
